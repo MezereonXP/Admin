@@ -1,0 +1,49 @@
+
+<mat-grid-list cols="3" rowHeight="6:1" class="select-list">
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile>
+        <mat-form-field>
+            <mat-select placeholder="请选择周期" class="select" [(ngModel)]="cycle" (selectionChange)="getTeamList(cycle)" >
+              <mat-option *ngFor="let cycle of cycleList" [value]="cycle.testCycleId">
+                {{cycle.testCycleName}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <mat-form-field class="example-full-width">
+          <input type="text" placeholder="输入队伍邮箱进行匹配" [(ngModel)]="teamEmail" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <button mat-raised-button color="primary" (click)="add()">Add</button>
+    </mat-grid-tile>
+</mat-grid-list>
+<table mat-table [dataSource]='teamList' style="width: 100%">
+    <ng-container matColumnDef="Email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let team"> {{team.email}} </td>
+    </ng-container>
+    <ng-container matColumnDef="teamName">
+        <th mat-header-cell *matHeaderCellDef> teamName </th>
+        <td mat-cell *matCellDef="let team"> {{team.teamName}} </td>
+    </ng-container>
+    <ng-container matColumnDef="lastLoginTime">
+        <th mat-header-cell *matHeaderCellDef> lastLoginTime </th>
+        <td mat-cell *matCellDef="let team"> {{getTime(team.lastLoginTime)}} </td>
+    </ng-container>
+    <ng-container matColumnDef="priority">
+        <th mat-header-cell *matHeaderCellDef> priority </th>
+        <td mat-cell *matCellDef="let team"> {{team.priority}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+

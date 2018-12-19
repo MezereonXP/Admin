@@ -1,0 +1,32 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<mat-grid-list cols="3" rowHeight="7:5" class="loginList">
+  <mat-grid-tile></mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card class="login-card">
+      <mat-grid-list cols="1" rowHeight="10:1" class="card-list">
+        <mat-grid-tile>MyH2O-Admin</mat-grid-tile>
+        <mat-grid-tile rowspan="2">
+          <mat-form-field class="width-full">
+              <input matInput placeholder="Email" id="email" [(ngModel)]="email"/>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile rowspan="2">
+            <mat-form-field class="width-full">
+                <input matInput placeholder="Enter your password" id="password" type="password" [(ngModel)]="pwd" [type]="hide ? 'password' : 'text'"/>
+                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <button mat-raised-button color="primary" (click)="login()">Login</button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile></mat-grid-tile>
+</mat-grid-list>
+
+
